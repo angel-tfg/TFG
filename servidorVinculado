@@ -1,0 +1,17 @@
+USE INTEGRACION;
+CREATE LOGIN powerbi WITH PASSWORD = '******';
+CREATE USER powerbi	 FOR LOGIN powerbi;
+GRANT SELECT ON dbo.Atestados TO powerbi;
+
+USE POWERBI;
+EXEC sp_addlinkedserver
+    @server = 'SRV-SQLW19',
+    @srvproduct = '',
+    @provider = 'SQLNCLI',
+    @datasrc = 'SRV-SQLW19\ARCGIS',
+    @catalog = 'INTEGRACION';
+EXEC sp_addlinkedsrvlogin
+    @rmtsrvname = 'SRV-SQLW19',
+    @useself = 'FALSE',
+    @rmtuser = 'powerbi',
+    @rmtpassword = '******';
