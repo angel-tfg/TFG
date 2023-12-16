@@ -85,4 +85,11 @@ AS SELECT [Id]
       ,[TipoReg]
   FROM [SRV-SQL].[GESTDOC_PRUEBAS].[dbo].[DirigidoA];
 
-
+CREATE VIEW [dbo].[GDvLogAcceso]
+AS
+SELECT LA.[Id]
+      ,LA.[Fecha]
+      ,LA.[Tipo]
+      ,LA.[Mensaje]
+FROM [SRV-SQL].[GESTDOC_PRUEBAS].[dbo].[LogAcceso] LA
+INNER JOIN [POWERBI].dbo.GDtTipoLogin TL ON TL.Id = LA.Tipo;
