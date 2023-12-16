@@ -34,3 +34,26 @@ INSERT INTO GDtTipoEntrada (Id, Descripcion) VALUES
 (0,'Entradas'),
 (1,'Salidas'),
 (2,'Expedientes');
+
+
+CREATE TABLE GDtTipoLogin (
+    Id INT PRIMARY KEY,
+    Descripcion NVARCHAR(255)
+);
+
+-- Insertar los datos
+INSERT INTO GDtTipoLogin(Id, Descripcion) VALUES
+(30, 'Registro con certificado'),
+(2, 'Login'),
+(45, 'Consulta padrón'),
+(47, 'Consulta datos personales'),
+(53, 'Guardando tercero'),
+(5, 'Generar volante padrón'),
+(61, 'Consulta notificación'),
+(70, 'Consulta tablón - anuncio'),
+(71, 'Consulta tablón'),
+(9, 'Notificacion Telematica'),
+(500, 'Acceso GDWeb'),
+(13, 'Consulta entradas'),
+(14, 'Consulta salidas'),
+(15, 'Consulta expediente')
