@@ -1,7 +1,8 @@
 # TFG: *Cuadro de mando para el seguimiento y análisis de la Administración Digital*
-Repositorio de código asociado
+Repositorio de código asociado al trabajo de fin de grado. Contiene el código y scripts que en él se mencionan, utilizados para su configuración y despliege.
 
-En este repositorio se encuentra el código asociado al trabajo de fin de grado
+# Objetivo
+Desarrollar un cuadro de mando en Power BI para la recogida de los indicadores más inportantes relacionados con la administración digital en una administración pública.
 
 # License
 Este proyecto se encuentra bajo licencia [MIT](https://opensource.org/license/mit/)
