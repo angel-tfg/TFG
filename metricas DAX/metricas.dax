@@ -1,0 +1,253 @@
+#Archivo con las métricas definidas en Power BI
+#Se encuentran separadas de las tablas de datos dentro de una tabla de métricas.
+
+#
+#Métricas de Registro
+#
+
+R. Entradas = 
+CALCULATE(
+    COUNTA('factEntradasSalidas'[Id]),
+    FILTER(
+        ALL('dimTipoReg'),
+        'dimTipoReg'[TipoEntrada] = "Entradas"
+    )
+)
+
+R. Expedientes = 
+CALCULATE(
+    COUNTA('factEntradasSalidas'[Id]),
+    FILTER(
+        ALL('dimTipoReg'),
+        'dimTipoReg'[TipoEntrada] = "Expedientes"
+    )
+)
+
+R. Materias con Expediente = 
+CALCULATE(
+    DISTINCTCOUNT('dimMateriaExpedientes'[Id]),
+    FILTER(
+        'factEntradasSalidas',
+        RELATED('dimTipoReg'[TipoEntrada]) = "Expedientes"
+    )
+)
+
+R. Salidas = 
+CALCULATE(
+    COUNTA('factEntradasSalidas'[Id]),
+    FILTER(
+        ALL('dimTipoReg'),
+        'dimTipoReg'[TipoEntrada] = "Salidas"
+    )
+)
+
+Registros totales = 
+CALCULATE(
+	COUNTA('factEntradasSalidas'[Id])
+)
+
+Total (sin filtros) = 
+CALCULATE(
+	COUNTA('factEntradasSalidas'[Id]),
+	ALL('dimTipoReg'[TipoEntrada])
+)
+
+#
+#Métricas de Notificaiones telemáticas
+#
+
+N. Accedidas en plazo = 
+CALCULATE(
+    COUNTA('factNotifTel'[Id]),
+    FILTER(
+        'factNotifTel',
+        NOT ISBLANK('factNotifTel'[DiaRecepcion]) && ISBLANK('factNotifTel'[DiaRechazo]) 
+    )
+)
+
+N. Acceedidas = COUNT('factNotifTel'[DiaRecepcion])
+
+N. Acceso fuera de plazo = 
+CALCULATE(
+    COUNTA('factNotifTel'[Id]),
+    FILTER(
+        'factNotifTel',
+        NOT ISBLANK('factNotifTel'[DiaRecepcion]) &&
+        NOT ISBLANK('factNotifTel'[DiaRechazo]) &&
+        (
+            'factNotifTel'[DiaRecepcion] > 'factNotifTel'[DiaRechazo] ||
+            (
+                'factNotifTel'[DiaRecepcion] = 'factNotifTel'[DiaRechazo] &&
+                'factNotifTel'[HoraRecepcion] > 'factNotifTel'[HoraRechazo]
+            )
+        )
+    )
+)
+
+N. Pendientes = 
+CALCULATE(
+    COUNTA('factNotifTel'[Id]),
+    FILTER(
+        'factNotifTel',
+        ISBLANK('factNotifTel'[DiaRecepcion]) && ISBLANK('factNotifTel'[DiaRechazo])
+    )
+)
+
+N. Rechazadas = COUNT('factNotifTel'[DiaRechazo])
+
+N. Rechazadas, sin acceso = 
+CALCULATE(
+    COUNTA('factNotifTel'[Id]),
+    FILTER(
+        'factNotifTel',
+        NOT ISBLANK('factNotifTel'[DiaRechazo]) && ISBLANK('factNotifTel'[DiaRecepcion])
+    )
+)
+
+Notif por Hora de Recepción = CALCULATE(
+COUNT(factNotifTel[Id]),
+USERELATIONSHIP(
+factNotifTel[HoraRecepcion],
+dimTiempo[Hora]
+))
+
+Notificaciones Totales = 
+CALCULATE(
+	COUNTA('factNotifTel'[Id])
+)
+
+Porcentaje accedidas en plazo = 
+VAR TotalAccedidasEnPlazo = CALCULATE(
+    COUNTA('factNotifTel'[Id]),
+    FILTER(
+        'factNotifTel',
+        NOT ISBLANK('factNotifTel'[DiaRecepcion]) && ISBLANK('factNotifTel'[DiaRechazo])
+    )
+)
+VAR TotalNotificaciones = CALCULATE(
+    COUNTA('factNotifTel'[Id]),
+    ALL('factNotifTel'[DiaAlta])
+)
+RETURN
+IF(
+    TotalNotificaciones > 0,
+    DIVIDE(TotalAccedidasEnPlazo, TotalNotificaciones),
+    BLANK()
+)
+
+Promedio de días, acceso en plazo = 
+CALCULATE(
+    AVERAGE('factNotifTel'[Días pasados a aceptación notificacion]),
+FILTER(
+        'factNotifTel',
+        NOT ISBLANK('factNotifTel'[DiaRecepcion]) && ISBLANK('factNotifTel'[DiaRechazo]) 
+    )
+)
+
+#
+#Métricas de Accesos a la Sede
+#
+
+A. Consulta Datos Personales = 
+CALCULATE(
+    COUNTA('factLogAcceso'[Id]),
+    FILTER(
+        'dimTipoLogin',
+        'dimTipoLogin'[Descripcion]="Consulta datos personales"
+    )
+)
+
+A. Consulta Entradas = 
+CALCULATE(
+    COUNTA('factLogAcceso'[Id]),
+    FILTER(
+        'dimTipoLogin',
+        'dimTipoLogin'[Descripcion]="Consulta entradas"
+    )
+)
+
+A. Consulta Expedientes = 
+CALCULATE(
+    COUNTA('factLogAcceso'[Id]),
+    FILTER(
+        'dimTipoLogin',
+        'dimTipoLogin'[Descripcion]="Consulta expediente"
+    )
+)
+
+A. Consulta Salidas = 
+CALCULATE(
+    COUNTA('factLogAcceso'[Id]),
+    FILTER(
+        'dimTipoLogin',
+        'dimTipoLogin'[Descripcion]="Consulta salidas"
+    )
+)
+
+A. Consulta Tablón = 
+CALCULATE(
+    COUNTA('factLogAcceso'[Id]),
+    FILTER(
+        'dimTipoLogin',
+        'dimTipoLogin'[Descripcion]="Consulta Tablón"
+    )
+)
+
+A. Consultas Notificaiones = 
+CALCULATE(
+    COUNTA('factLogAcceso'[Id]),
+    FILTER(
+        'dimTipoLogin',
+        'dimTipoLogin'[Descripcion]="Consulta notificación"
+    )
+)
+
+A. Consultas Padrón = 
+CALCULATE(
+    COUNTA('factLogAcceso'[Id]),
+    FILTER(
+        'dimTipoLogin',
+        'dimTipoLogin'[Descripcion]="Consulta padrón"
+    )
+)
+
+A. Generar Volante Padrón = 
+CALCULATE(
+    COUNTA('factLogAcceso'[Id]),
+    FILTER(
+        'dimTipoLogin',
+        'dimTipoLogin'[Descripcion]="Generar volante padrón"
+    )
+)
+
+A. Gestdoc Web = 
+CALCULATE(
+    COUNTA('factLogAcceso'[Id]),
+    FILTER(
+        'dimTipoLogin',
+        'dimTipoLogin'[Descripcion]="Acceso GDWeb"
+    )
+)
+
+A. Login en web = 
+CALCULATE(
+    COUNTA('factLogAcceso'[Id]),
+    FILTER(
+        'dimTipoLogin',
+        'dimTipoLogin'[Descripcion]="Login"
+    )
+)
+
+A. Reg. con Certificado = 
+CALCULATE(
+    COUNTA('factLogAcceso'[Id]),
+    FILTER(
+        'dimTipoLogin',
+        'dimTipoLogin'[Descripcion]="Registro con certificado"
+    )
+)
+
+Accesos Totales = 
+CALCULATE(
+	COUNTA('factLogAcceso'[Id])
+)
