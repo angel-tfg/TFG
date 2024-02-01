@@ -9,7 +9,7 @@ El objetivo final es conseguir una “cultura orientada la dato” en la Adminis
 # Enlace al Cuadro de Mando
 
 # Nota importante
-Los datos presentes en el cuadro han sido debidamene anonimizados y distorsionados para simular la situación real, la publicación no es oficial y por tanto solo persigue mostrar funcionalidad, usabilidad y estética, evitando la publicación de los datos reales. 
+Los datos presentes en el cuadro han sido debidamene anonimizados y distorsionados para simular la situación real, la publicación no es oficial y por tanto, solo persigue mostrar funcionalidad, usabilidad y estética, evitando la publicación de los datos reales. 
 
 # License
 Este proyecto se encuentra bajo licencia [MIT](https://opensource.org/license/mit/)
