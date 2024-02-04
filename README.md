@@ -1,4 +1,4 @@
-# TFG: *Cuadro de mando para el seguimiento y análisis de la administración igital*
+# TFG: *Cuadro de mando para el seguimiento y análisis de la administración digital* UNIR
 Repositorio de código asociado al trabajo de fin de grado. Contiene el código y scripts que en él se mencionan, utilizados para la configuración y despliege.
 
 # Objetivo
