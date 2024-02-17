@@ -8,7 +8,7 @@ La interfaz del Cuadro de Mando se ha diseñado priorizando la usabilidad, senci
 Las posibilidades de continuidad y mejora futuras son prometedoras, gracias la integración de nuevas fuentes de datos y el uso de la inteligencia artificial.  
 El objetivo final es conseguir una “cultura orientada la dato” en la Administración pública que permita la mejora continua y la innovación tanto en la gestión como en los servicios prestados.
 
-# Enlace al Cuadro de Mando
+# Enlace al Cuadro de Mando demostrativo
 
 # Nota importante
 Los datos presentes en el cuadro han sido debidamene anonimizados y ofuscados para simular la situación real, la publicación no es oficial y por tanto, solo persigue mostrar funcionalidad, usabilidad y estética, evitando la publicación de los datos reales. 
