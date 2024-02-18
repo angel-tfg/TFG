@@ -9,7 +9,8 @@ Las posibilidades de continuidad y mejora futuras son prometedoras, gracias la i
 El objetivo final es conseguir una “cultura orientada la dato” en la Administración pública que permita la mejora continua y la innovación tanto en la gestión como en los servicios prestados.
 
 # Enlace al Cuadro de Mando demostrativo
-<iframe title="GDPruebasOfuscada" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=ed47eaa9-69cd-437f-aa07-54c3e22085de&autoAuth=true&ctid=ec280948-258b-4773-a3ff-ca8571401d0d" frameborder="0" allowFullScreen="true"></iframe>
+https://app.powerbi.com/view?r=eyJrIjoiNzc0NjhjZGUtOGU1Ni00YWRhLTg4YjEtMTAxYWJkNzMyNTFjIiwidCI6ImVjMjgwOTQ4LTI1OGItNDc3My1hM2ZmLWNhODU3MTQwMWQwZCIsImMiOjl9&pageName=ReportSection
+
 # Nota importante
 Los datos presentes en el cuadro han sido debidamene anonimizados y ofuscados para simular la situación real, la publicación no es oficial y por tanto, solo persigue mostrar funcionalidad, usabilidad y estética, evitando la publicación de los datos reales. 
 
